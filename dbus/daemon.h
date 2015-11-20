@@ -22,6 +22,8 @@
 
 #include <QObject>
 
+#include "include/Application.hpp"
+
 class Daemon : public QObject
 {
     Q_OBJECT
@@ -36,6 +38,9 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void finished(const QString &words);
+
+private:
+    CppJieba::Application *m_app = nullptr;
 };
 
 #endif // DAEMON_H

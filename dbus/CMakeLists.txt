@@ -22,6 +22,8 @@ target_link_libraries(kjieba
     KF5::DBusAddons
 )
 
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../libcppjieba/dict DESTINATION ${LIBCPPJIEBAR_DIR})
+
 install(TARGETS kjieba ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES ${kjieba_dbusAppXML} DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR} )
 install(FILES kjieba.desktop DESTINATION ${KDE_INSTALL_AUTOSTARTDIR})

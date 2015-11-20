@@ -26,22 +26,40 @@
 
 #include "appadaptor.h"
 
-#include "include/Application.hpp"
+#include <iostream>
+#include <string>
+#include <vector>
 
 Daemon::Daemon(QObject *parent)
     : QObject(parent)
 {
+    m_app = new CppJieba::Application(LIBCPPJIEBAR_DICT_DIR + std::string("/jieba.dict.utf8"), 
+                                      LIBCPPJIEBAR_DICT_DIR + std::string("/hmm_model.utf8"), 
+                                      LIBCPPJIEBAR_DICT_DIR + std::string("/user.dict.utf8"), 
+                                      LIBCPPJIEBAR_DICT_DIR + std::string("/idf.utf8"), 
+                                      LIBCPPJIEBAR_DICT_DIR + std::string("/stop_words.utf8"));
     new AppAdaptor(this);
     QDBusConnection::sessionBus().registerObject(QLatin1String("/App"), this);
 }
 
 Daemon::~Daemon()
 {
+    if (m_app) {
+        delete m_app;
+        m_app = nullptr;
+    }
 }
 
 void Daemon::query(const QString &term)
 {
-    emit finished(term);
+    std::vector<std::string> words;
+    std::string ret;
+    m_app->cut(term.toStdString(), words, CppJieba::METHOD_QUERY);
+    ret = CppJieba::join(words.begin(), words.end(), "/");
+#if DEBUG
+    std::cout << ret << std::endl;
+#endif
+    emit finished(QString::fromStdString(ret));
 }
 
 #include "moc_daemon.cpp"
