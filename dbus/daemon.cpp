@@ -27,7 +27,7 @@
 #include "appadaptor.h"
 
 Daemon::Daemon(QObject *parent)
-    : QObject(parent),
+    : QObject(parent)
 {
     new AppAdaptor(this);
     QDBusConnection::sessionBus().registerObject(QLatin1String("/App"), this);
@@ -39,6 +39,7 @@ Daemon::~Daemon()
 
 void Daemon::query(const QString &term)
 {
+    Q_UNUSED(term);
 }
 
 #include "moc_daemon.cpp"

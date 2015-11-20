@@ -13,16 +13,16 @@ endif()
 find_package(ECM 1.3.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
-find_package(Qt5 REQUIRED COMPONENTS Core)
+find_package(Qt5 REQUIRED COMPONENTS Widgets)
 find_package(KF5 REQUIRED COMPONENTS I18n DBusAddons)
 
 include(FeatureSummary)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings)
+include(ECMPackageConfigHelpers)
 
-#add_subdirectory(dbus)
-add_subdirectory(libcppjieba)
+add_subdirectory(dbus)
 add_subdirectory(po)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

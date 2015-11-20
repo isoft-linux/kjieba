@@ -20,6 +20,8 @@
 #ifndef DAEMON_H
 #define DAEMON_H
 
+#include <QObject>
+
 class Daemon : public QObject
 {
     Q_OBJECT

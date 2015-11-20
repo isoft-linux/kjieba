@@ -3,9 +3,9 @@ set(kjieba_SRCS
     daemon.cpp
 )
 
-set(kjieba_dbusAppXML dbus/org.isoftlinux.kjieba.App.xml)
+set(kjieba_dbusAppXML org.isoftlinux.kjieba.App.xml)
 qt5_add_dbus_adaptor(kjieba_SRCS ${kjieba_dbusAppXML} daemon.h Daemon)
-configure_file(dbus/org.isoftlinux.kjieba.service.in
+configure_file(org.isoftlinux.kjieba.service.in
                ${CMAKE_CURRENT_BINARY_DIR}/org.isoftlinux.kjieba.service)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.isoftlinux.kjieba.service
         DESTINATION ${KDE_INSTALL_DBUSSERVICEDIR})
@@ -13,7 +13,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.isoftlinux.kjieba.service
 add_executable(kjieba ${kjieba_SRCS})
 
 target_link_libraries(kjieba
-    Qt5::Core
+    Qt5::Widgets
     KF5::I18n
     KF5::DBusAddons
 )

@@ -25,10 +25,9 @@
 #include <QDebug>
 #include <QSessionManager>
 
-#include <KAboutData>
 #include <kdbusservice.h>
 
-#include "app.h"
+#include "daemon.h"
 
 static QCommandLineParser parser;
 
@@ -49,14 +48,6 @@ int main(int argc, char *argv[])
     parser.addVersionOption();
     parser.process(app);
 
-    KAboutData aboutData("kjieba",
-        i18n("kjieba"),
-        PROJECT_VERSION,
-        i18n("libcppjieba interface"),
-        KAboutLicense::GPL);
-
-    KAboutData::setApplicationData(aboutData);
-
     auto disableSessionManagement = [](QSessionManager &sm) {
         sm.setRestartHint(QSessionManager::RestartNever);
     };
@@ -64,8 +55,6 @@ int main(int argc, char *argv[])
     QObject::connect(&app, &QGuiApplication::saveStateRequest, disableSessionManagement);
 
     Daemon daemon;
-
-    QObject::connect(&service, &KDBusService::activateRequested, &daemon, &Daemon::foo);
 
     return app.exec();
 }
