@@ -33,6 +33,9 @@ public:
 
 public Q_SLOTS:
     void query(const QString &term);
+
+Q_SIGNALS:
+    void finished(const QString &words);
 };
 
 #endif // DAEMON_H

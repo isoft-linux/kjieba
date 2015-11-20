@@ -26,6 +26,8 @@
 
 #include "appadaptor.h"
 
+#include "include/Application.hpp"
+
 Daemon::Daemon(QObject *parent)
     : QObject(parent)
 {
@@ -39,7 +41,7 @@ Daemon::~Daemon()
 
 void Daemon::query(const QString &term)
 {
-    Q_UNUSED(term);
+    emit finished(term);
 }
 
 #include "moc_daemon.cpp"
