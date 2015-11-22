@@ -1,3 +1,6 @@
 [submodule "libcppjieba"]
 	path = libcppjieba
 	url = git@github.com:yanyiwu/libcppjieba.git
+[submodule "Chinese2Pinyin"]
+	path = Chinese2Pinyin
+	url = git@github.com:jishipu/Chinese2Pinyin.git
