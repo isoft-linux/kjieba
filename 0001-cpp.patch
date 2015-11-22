@@ -1,0 +1,62 @@
+diff --git a/functions.h b/functions.h
+index 60127e9..9009193 100644
+--- a/functions.h
++++ b/functions.h
+@@ -3,7 +3,15 @@
+ 
+ #include "sds.h"
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
+ void utf8_to_pinyin(sds in, sds out, FILE *fp);
+ int is_text_utf8(const char* str, long length);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif // FUNCTIONS_H_INCLUDED
+diff --git a/sds.h b/sds.h
+index e752027..15be5dc 100644
+--- a/sds.h
++++ b/sds.h
+@@ -39,6 +39,10 @@
+ #include <sys/types.h>
+ #include <stdarg.h>
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
+ /*
+  * 类型别名，用于指向 sdshdr 的 buf 属性
+  */
+@@ -65,7 +69,7 @@ struct sdshdr {
+  * T = O(1)
+  */
+ static inline size_t sdslen(const sds s) {
+-    struct sdshdr *sh = (void*)(s-(sizeof(struct sdshdr)));
++    struct sdshdr *sh = (struct sdshdr*)(s-(sizeof(struct sdshdr)));
+     return sh->len;
+ }
+ 
+@@ -75,7 +79,7 @@ static inline size_t sdslen(const sds s) {
+  * T = O(1)
+  */
+ static inline size_t sdsavail(const sds s) {
+-    struct sdshdr *sh = (void*)(s-(sizeof(struct sdshdr)));
++    struct sdshdr *sh = (struct sdshdr*)(s-(sizeof(struct sdshdr)));
+     return sh->free;
+ }
+ 
+@@ -123,4 +127,8 @@ void sdsIncrLen(sds s, int incr);
+ sds sdsRemoveFreeSpace(sds s);
+ size_t sdsAllocSize(sds s);
+ 
++#ifdef __cplusplus
++}
++#endif
++
+ #endif

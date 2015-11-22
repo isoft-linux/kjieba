@@ -21,6 +21,7 @@
 #define DAEMON_H
 
 #include <QObject>
+#include <stdio.h>
 
 #include "include/Application.hpp"
 
@@ -35,12 +36,14 @@ public:
 
 public Q_SLOTS:
     void query(const QString &term);
+    void pinyin(const QString &chinese);
 
 Q_SIGNALS:
     void finished(const QString &words);
 
 private:
     CppJieba::Application *m_app = nullptr;
+    FILE *m_fp = nullptr;
 };
 
 #endif // DAEMON_H

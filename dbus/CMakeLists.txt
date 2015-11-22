@@ -1,10 +1,16 @@
+add_definitions(-std=c++11 -std=gnu99)
+
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/../libcppjieba
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Chinese2Pinyin
 )
 
 set(kjieba_SRCS
     main.cpp
     daemon.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Chinese2Pinyin/sds.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Chinese2Pinyin/zmalloc.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../Chinese2Pinyin/functions.c
 )
 
 set(kjieba_dbusAppXML org.isoftlinux.kjieba.App.xml)
@@ -23,6 +29,7 @@ target_link_libraries(kjieba
 )
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../libcppjieba/dict DESTINATION ${LIBCPPJIEBAR_DIR})
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/../Chinese2Pinyin/PinyinData.txt DESTINATION ${CHINESE2PINYIN_DIR})
 
 install(TARGETS kjieba ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES ${kjieba_dbusAppXML} DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR} )

@@ -3,11 +3,12 @@ cmake_minimum_required(VERSION 2.8.12)
 set(PROJECT_VERSION "0.1.0")
 set(LIBCPPJIEBAR_DIR ${CMAKE_INSTALL_PREFIX}/share/libcppjieba)
 set(LIBCPPJIEBAR_DICT_DIR ${LIBCPPJIEBAR_DIR}/dict)
+set(CHINESE2PINYIN_DIR ${CMAKE_INSTALL_PREFIX}/share/Chinese2Pinyin)
 
-add_definitions(-std=c++11 -Werror)
 add_definitions("-DPROJECT_VERSION=\"${PROJECT_VERSION}\"")
 add_definitions("-DLIBCPPJIEBAR_DIR=\"${LIBCPPJIEBAR_DIR}\"")
 add_definitions("-DLIBCPPJIEBAR_DICT_DIR=\"${LIBCPPJIEBAR_DICT_DIR}\"")
+add_definitions("-DCHINESE2PINYIN_DIR=\"${CHINESE2PINYIN_DIR}\"")
 
 option(ENABLE_DEBUG "Enable debug" OFF)
 if(ENABLE_DEBUG)

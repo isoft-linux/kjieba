@@ -5,6 +5,10 @@
       <arg name="term" type="s" direction="in"/>
     </method>
 
+    <method name="pinyin">
+      <arg name="chinese" type="s" direction="in"/>
+    </method>
+
     <signal name="finished">
       <arg name="words" type="s"/>
     </signal>
