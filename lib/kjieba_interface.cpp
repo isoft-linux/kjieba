@@ -21,23 +21,16 @@
  * $END_LICENSE$
  ***************************************************************************/
 
-#include <QtCore/QDebug>
-#include <QtDBus/QDBusPendingCallWatcher>
-
 #include "kjieba_interface.h"
 #include "kjieba_interface_p.h"
 
 namespace KJieba {
 
-/*
- * KJiebaInterfacePrivate
- */
-
 KJiebaInterfacePrivate::KJiebaInterfacePrivate(const QDBusConnection &bus)
 {
     interface = new OrgIsoftlinuxKjiebaAppInterface(
         QStringLiteral("org.isoftlinux.kjieba"),
-        QStringLiteral("/org/isoftlinux/kjieba"),
+        QStringLiteral("/App"),
         bus);
 }
 

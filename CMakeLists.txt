@@ -30,5 +30,6 @@ include(ECMPackageConfigHelpers)
 add_subdirectory(dbus)
 add_subdirectory(lib)
 add_subdirectory(po)
+add_subdirectory(example)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
