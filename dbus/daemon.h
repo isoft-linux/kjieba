@@ -34,10 +34,7 @@ public:
     virtual ~Daemon();
 
 public Q_SLOTS:
-    void query(const QString &term);
-
-Q_SIGNALS:
-    void finished(const QString &words);
+    QString query(const QString &term, int method);
 
 private:
     CppJieba::Application *m_app = nullptr;

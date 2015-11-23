@@ -24,6 +24,8 @@
 #include "kjieba_interface.h"
 #include "kjieba_interface_p.h"
 
+#include <iostream>
+
 namespace KJieba {
 
 KJiebaInterfacePrivate::KJiebaInterfacePrivate(const QDBusConnection &bus)
@@ -39,19 +41,10 @@ KJiebaInterfacePrivate::~KJiebaInterfacePrivate()
     delete interface;
 }
 
-void KJiebaInterfacePrivate::_q_finished(const QString &words)
-{
-    Q_Q(KJiebaInterface);
-    Q_EMIT q->finished(words.split("/"));
-}
-
 KJiebaInterface::KJiebaInterface(const QDBusConnection &bus)
     : d_ptr(new KJiebaInterfacePrivate(bus))
 {
     d_ptr->q_ptr = this;
-
-    connect(d_ptr->interface, SIGNAL(finished(const QString &)),
-            this, SLOT(_q_finished(const QString &)));
 }
 
 KJiebaInterface::~KJiebaInterface()
@@ -59,10 +52,21 @@ KJiebaInterface::~KJiebaInterface()
     delete d_ptr;
 }
 
-void KJiebaInterface::query(const QString &term)
+QStringList KJiebaInterface::query(const QString &term, CutMethod method)
 {
     Q_D(KJiebaInterface);
-    d->interface->query(term);
+
+    QString words = "";
+    QDBusPendingReply<QString> reply = d->interface->query(term, int(method));
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        std::cerr << "ERROR: failed to query" << std::endl;
+    } else {
+        words = reply.argumentAt<0>();
+    }
+
+    return words.split("/");
 }
 
 }

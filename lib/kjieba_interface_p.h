@@ -41,8 +41,6 @@ public:
 
     KJiebaInterface *q_ptr;
     OrgIsoftlinuxKjiebaAppInterface *interface;
-
-    void _q_finished(const QString &words);
 };
 
 }

@@ -51,16 +51,16 @@ Daemon::~Daemon()
     }
 }
 
-void Daemon::query(const QString &term)
+QString Daemon::query(const QString &term, int method)
 {
     std::vector<std::string> words;
     std::string ret;
-    m_app->cut(term.toStdString(), words, CppJieba::METHOD_QUERY);
+    m_app->cut(term.toStdString(), words, CppJieba::CutMethod(method));
     ret = CppJieba::join(words.begin(), words.end(), "/");
 #if DEBUG
     std::cout << "DEBUG: " << __FILE__ << " " << __PRETTY_FUNCTION__ << ret << std::endl;
 #endif
-    emit finished(QString::fromStdString(ret));
+    return QString::fromStdString(ret);
 }
 
 #include "moc_daemon.cpp"

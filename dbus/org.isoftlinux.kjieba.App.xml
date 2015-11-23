@@ -3,10 +3,8 @@
   <interface name="org.isoftlinux.kjieba.App">
     <method name="query">
       <arg name="term" type="s" direction="in"/>
+      <arg name="method" type="x" direction="in"/>
+      <arg name="words" type="s" direction="out"/>
     </method>
-
-    <signal name="finished">
-      <arg name="words" type="s"/>
-    </signal>
   </interface>
 </node>

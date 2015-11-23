@@ -31,6 +31,14 @@
 
 namespace KJieba {
 
+enum CutMethod {
+    METHOD_MP,
+    METHOD_HMM,
+    METHOD_MIX,
+    METHOD_FULL,
+    METHOD_QUERY
+};
+
 class KJiebaInterfacePrivate;
 
 class KJIEBA_EXPORT KJiebaInterface : public QObject
@@ -40,17 +48,13 @@ public:
     explicit KJiebaInterface(const QDBusConnection &bus = QDBusConnection::sessionBus());
     ~KJiebaInterface();
 
-    void query(const QString &term);
-
-Q_SIGNALS:
-    void finished(const QStringList &words);
+    QStringList query(const QString &term, CutMethod method = METHOD_MIX);
 
 protected:
     KJiebaInterfacePrivate *d_ptr;
 
 private:
     Q_DECLARE_PRIVATE(KJiebaInterface)
-    Q_PRIVATE_SLOT(d_func(), void _q_finished(const QString &words))
 };
 
 }
