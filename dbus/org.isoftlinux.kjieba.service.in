@@ -1,4 +1,4 @@
 [D-BUS Service]
-Name=org.kde.krunner
-Exec=@CMAKE_INSTALL_PREFIX@/bin/krunner
+Name=org.kde.kjieba
+Exec=@CMAKE_INSTALL_PREFIX@/bin/kjieba
 
