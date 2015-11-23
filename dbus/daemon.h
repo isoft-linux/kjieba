@@ -21,9 +21,6 @@
 #define DAEMON_H
 
 #include <QObject>
-#include <QMutex>
-
-#include <stdio.h>
 
 #include "include/Application.hpp"
 
@@ -38,15 +35,12 @@ public:
 
 public Q_SLOTS:
     void query(const QString &term);
-    void pinyin(const QString &chinese);
 
 Q_SIGNALS:
     void finished(const QString &words);
 
 private:
     CppJieba::Application *m_app = nullptr;
-    FILE *m_fp = nullptr;
-    QMutex m_mutex;
 };
 
 #endif // DAEMON_H

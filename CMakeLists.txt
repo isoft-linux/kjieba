@@ -10,6 +10,7 @@ add_definitions("-DLIBCPPJIEBAR_DIR=\"${LIBCPPJIEBAR_DIR}\"")
 add_definitions("-DLIBCPPJIEBAR_DICT_DIR=\"${LIBCPPJIEBAR_DICT_DIR}\"")
 add_definitions("-DCHINESE2PINYIN_DIR=\"${CHINESE2PINYIN_DIR}\"")
 
+add_definitions(-std=c++11)
 option(ENABLE_DEBUG "Enable debug" OFF)
 if(ENABLE_DEBUG)
     add_definitions(-g -DDEBUG)
@@ -29,6 +30,5 @@ include(ECMPackageConfigHelpers)
 
 add_subdirectory(dbus)
 add_subdirectory(po)
-add_subdirectory(test)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
