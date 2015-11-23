@@ -43,7 +43,7 @@ public:
     void query(const QString &term);
 
 Q_SIGNALS:
-    void finished(const QString &words);
+    void finished(const QStringList &words);
 
 protected:
     KJiebaInterfacePrivate *d_ptr;

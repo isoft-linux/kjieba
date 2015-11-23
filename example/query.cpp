@@ -34,8 +34,10 @@ int main(int argc, char *argv[])
     QCoreApplication app(argc, argv);
 
     KJiebaInterface *interface = new KJiebaInterface;
-    QObject::connect(interface, &KJiebaInterface::finished, [=](const QString &words){
-            std::cout << words.toStdString() << std::endl;
+    QObject::connect(interface, &KJiebaInterface::finished, [=](const QStringList &words){
+                Q_FOREACH (QString word, words) {
+                    std::cout << word.toStdString() << std::endl;
+                }
             });
     interface->query(argv[1] ? argv[1] : "我是中国人");
 

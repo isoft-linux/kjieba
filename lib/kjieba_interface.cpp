@@ -42,7 +42,7 @@ KJiebaInterfacePrivate::~KJiebaInterfacePrivate()
 void KJiebaInterfacePrivate::_q_finished(const QString &words)
 {
     Q_Q(KJiebaInterface);
-    Q_EMIT q->finished(words);
+    Q_EMIT q->finished(words.split("/"));
 }
 
 KJiebaInterface::KJiebaInterface(const QDBusConnection &bus)
