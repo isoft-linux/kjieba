@@ -1,4 +1,4 @@
 [D-BUS Service]
-Name=org.kde.kjieba
+Name=org.isoftlinux.kjieba
 Exec=@CMAKE_INSTALL_PREFIX@/bin/kjieba
 

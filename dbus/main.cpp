@@ -22,7 +22,6 @@
 
 #include <qcommandlineparser.h>
 #include <qcommandlineoption.h>
-#include <QDebug>
 #include <QSessionManager>
 
 #include <kdbusservice.h>
