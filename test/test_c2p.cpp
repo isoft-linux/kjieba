@@ -30,8 +30,10 @@ int main(int argc, char *argv[])
 
     words = sdsnew(argv[1] ? argv[1] : "我是中国人");
     len = sdslen(words);
-    if (!is_text_utf8(words, len))
+    if (!is_text_utf8(words, len)) {
+        std::cerr << "ERROR: " << words << " is not utf8 text" << std::endl;
         goto exit;
+    }
     if (nullptr == (fp = fopen(CHINESE2PINYIN_DIR "/PinyinData.txt", "r"))) {
         std::cerr << "ERROR: failed to open file" << std::endl;
         goto exit;
