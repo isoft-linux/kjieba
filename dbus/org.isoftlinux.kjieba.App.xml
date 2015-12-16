@@ -6,5 +6,10 @@
       <arg name="method" type="x" direction="in"/>
       <arg name="words" type="s" direction="out"/>
     </method>
+    <method name="topinyin">
+      <arg name="chinese" type="s" direction="in"/>
+      <arg name="init" type="x" direction="in"/>
+      <arg name="pinyin" type="s" direction="out"/>
+    </method>
   </interface>
 </node>

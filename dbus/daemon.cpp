@@ -39,6 +39,8 @@ Daemon::Daemon(QObject *parent)
                                       LIBCPPJIEBAR_DICT_DIR + std::string("/idf.utf8"), 
                                       LIBCPPJIEBAR_DICT_DIR + std::string("/stop_words.utf8"));
 
+    m_pinyin = new PinYinInit; 
+
     new AppAdaptor(this);
     QDBusConnection::sessionBus().registerObject(QLatin1String("/App"), this);
 }
@@ -49,6 +51,11 @@ Daemon::~Daemon()
         delete m_app;
         m_app = nullptr;
     }
+
+    if (m_pinyin) {
+        delete m_pinyin;
+        m_pinyin = nullptr;
+    }
 }
 
 QString Daemon::query(const QString &term, int method)
@@ -58,7 +65,18 @@ QString Daemon::query(const QString &term, int method)
     m_app->cut(term.toStdString(), words, CppJieba::CutMethod(method));
     ret = CppJieba::join(words.begin(), words.end(), "/");
 #if DEBUG
-    std::cout << "DEBUG: " << __FILE__ << " " << __PRETTY_FUNCTION__ << ret << std::endl;
+    std::cout << "DEBUG: " << __FILE__ << " " << __PRETTY_FUNCTION__ << " " 
+        << ret << std::endl;
+#endif
+    return QString::fromStdString(ret);
+}
+
+QString Daemon::topinyin(const QString &chinese, int init) 
+{
+    std::string ret = init ? m_pinyin->getInitials(chinese.toStdString()) : m_pinyin->get(chinese.toStdString());
+#if DEBUG
+    std::cout << "DEBUG: " << __FILE__ << " " << __PRETTY_FUNCTION__ << " " 
+        << ret << std::endl;
 #endif
     return QString::fromStdString(ret);
 }

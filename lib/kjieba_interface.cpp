@@ -69,6 +69,23 @@ QStringList KJiebaInterface::query(const QString &term, CutMethod method)
     return words.split("/");
 }
 
+QString KJiebaInterface::topinyin(const QString &chinese, PinyinInit init) 
+{
+    Q_D(KJiebaInterface);
+
+    QString pinyin = "";
+    QDBusPendingReply<QString> reply = d->interface->topinyin(chinese, int(init));
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        std::cerr << "ERROR: failed topinyin" << std::endl;
+    } else {
+        pinyin = reply.argumentAt<0>();
+    }
+
+    return pinyin;
+}
+
 }
 
 #include "moc_kjieba_interface.cpp"

@@ -37,5 +37,6 @@ int main(int argc, char *argv[])
     QStringList words = interface->query(argv[1] ? argv[1] : "我是中国人");
     Q_FOREACH (QString word, words)
         std::cout << word.toStdString() << std::endl;
+    std::cout << interface->topinyin(argv[1] ? argv[1] : "我是中国人").toStdString() << std::endl;
     return 0;
 }

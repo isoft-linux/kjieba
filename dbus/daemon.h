@@ -22,6 +22,8 @@
 
 #include <QObject>
 
+#include "pinyin.h"
+
 #include "include/Application.hpp"
 
 class Daemon : public QObject
@@ -30,14 +32,16 @@ class Daemon : public QObject
     Q_CLASSINFO("D-Bus Interface", "org.isoftlinux.kjieba.App")
 
 public:
-    explicit Daemon(QObject *parent = 0);
+    explicit Daemon(QObject *parent = nullptr);
     virtual ~Daemon();
 
 public Q_SLOTS:
     QString query(const QString &term, int method);
+    QString topinyin(const QString &chinese, int init);
 
 private:
     CppJieba::Application *m_app = nullptr;
+    PinYinInit *m_pinyin = nullptr;
 };
 
 #endif // DAEMON_H
