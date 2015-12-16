@@ -1,6 +1,6 @@
 KJieba
  
-DBus interface of libcppjieba for KDE5.
+DBus interface of libcppjieba && Chinese2Pinyin for KDE5.
 
 
 Build && Install
