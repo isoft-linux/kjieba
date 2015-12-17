@@ -1,6 +1,6 @@
 project(kjieba)
 cmake_minimum_required(VERSION 2.8.12)
-set(PROJECT_VERSION "0.3.0")
+set(PROJECT_VERSION "0.4.0")
 set(PROJECT_SOVERSION 0)
 set(LIBCPPJIEBAR_DIR ${CMAKE_INSTALL_PREFIX}/share/libcppjieba)
 set(LIBCPPJIEBAR_DICT_DIR ${LIBCPPJIEBAR_DIR}/dict)

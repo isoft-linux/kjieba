@@ -39,11 +39,6 @@ enum CutMethod {
     METHOD_QUERY
 };
 
-enum PinyinInit {
-    NOINIT,
-    INIT
-};
-
 class KJiebaInterfacePrivate;
 
 class KJIEBA_EXPORT KJiebaInterface : public QObject
@@ -55,7 +50,7 @@ public:
 
     QStringList query(const QString &term, CutMethod method = METHOD_MIX);
     
-    QString topinyin(const QString &chinese, PinyinInit init = NOINIT);
+    QString topinyin(const QString &chinese, bool initialLetter = true);
 
 protected:
     KJiebaInterfacePrivate *d_ptr;

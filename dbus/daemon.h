@@ -37,7 +37,7 @@ public:
 
 public Q_SLOTS:
     QString query(const QString &term, int method);
-    QString topinyin(const QString &chinese, int init);
+    QString topinyin(const QString &chinese, bool initial_letter);
 
 private:
     CppJieba::Application *m_app = nullptr;

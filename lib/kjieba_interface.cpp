@@ -69,12 +69,12 @@ QStringList KJiebaInterface::query(const QString &term, CutMethod method)
     return words.split("/");
 }
 
-QString KJiebaInterface::topinyin(const QString &chinese, PinyinInit init) 
+QString KJiebaInterface::topinyin(const QString &chinese, bool initialLetter) 
 {
     Q_D(KJiebaInterface);
 
     QString pinyin = "";
-    QDBusPendingReply<QString> reply = d->interface->topinyin(chinese, int(init));
+    QDBusPendingReply<QString> reply = d->interface->topinyin(chinese, initialLetter);
     reply.waitForFinished();
 
     if (reply.isError()) {

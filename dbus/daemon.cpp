@@ -71,9 +71,9 @@ QString Daemon::query(const QString &term, int method)
     return QString::fromStdString(ret);
 }
 
-QString Daemon::topinyin(const QString &chinese, int init) 
+QString Daemon::topinyin(const QString &chinese, bool initial_letter) 
 {
-    std::string ret = init ? m_pinyin->getInitials(chinese.toStdString()) : m_pinyin->get(chinese.toStdString());
+    std::string ret = initial_letter ? m_pinyin->getInitials(chinese.toStdString()) : m_pinyin->get(chinese.toStdString());
 #if DEBUG
     std::cout << "DEBUG: " << __FILE__ << " " << __PRETTY_FUNCTION__ << " " 
         << ret << std::endl;

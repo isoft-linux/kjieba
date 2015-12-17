@@ -38,5 +38,6 @@ int main(int argc, char *argv[])
     Q_FOREACH (QString word, words)
         std::cout << word.toStdString() << std::endl;
     std::cout << interface->topinyin(argv[1] ? argv[1] : "我是中国人").toStdString() << std::endl;
+    std::cout << interface->topinyin(argv[1] ? argv[1] : "我是中国人", false).toStdString() << std::endl;
     return 0;
 }

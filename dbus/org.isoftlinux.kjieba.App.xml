@@ -8,7 +8,7 @@
     </method>
     <method name="topinyin">
       <arg name="chinese" type="s" direction="in"/>
-      <arg name="init" type="x" direction="in"/>
+      <arg name="initial_letter" type="b" direction="in"/>
       <arg name="pinyin" type="s" direction="out"/>
     </method>
   </interface>
