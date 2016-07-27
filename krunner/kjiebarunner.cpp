@@ -18,6 +18,8 @@
 
 #include "kjiebarunner.h"
 
+#include <algorithm>
+
 #include <QMimeData>
 #include <QIcon>
 #include <QDebug>
@@ -30,11 +32,10 @@
 #include <KServiceTypeTrader>
 
 KJiebaRunner::KJiebaRunner(QObject *parent, const QVariantList &args)
-    : Plasma::AbstractRunner(parent, args)
+  : Plasma::AbstractRunner(parent, args),
+    kjiebaPtr(new KJiebaInterface)
 {
     Q_UNUSED(args)
-
-    kjieba = new KJiebaInterface;
 
     setObjectName(QLatin1String("KJieba"));
     setPriority(AbstractRunner::HighestPriority);
@@ -44,10 +45,6 @@ KJiebaRunner::KJiebaRunner(QObject *parent, const QVariantList &args)
 
 KJiebaRunner::~KJiebaRunner()
 {
-    if (kjieba) {
-        delete kjieba;
-        kjieba = nullptr;
-    }
 }
 
 QStringList KJiebaRunner::categories() const
@@ -78,24 +75,22 @@ void KJiebaRunner::match(Plasma::RunnerContext &context)
         qDebug() << "DEBUG:" << __PRETTY_FUNCTION__ << term;
 #endif
         KService::List services = KServiceTypeTrader::self()->query("Application");
-        KService::List::iterator it = services.begin();
-        while (it != services.end()) {
-            if ((*it)->exec().isEmpty() ||
-                (!kjieba->query((*it)->genericName()).contains(term)            &&
-                 !kjieba->topinyin((*it)->genericName()).contains(term)         &&
-                 !kjieba->topinyin((*it)->genericName(), false).contains(term)  &&
-                 !kjieba->query((*it)->name()).contains(term)                   &&
-                 !kjieba->topinyin((*it)->name()).contains(term)                &&
-                 !kjieba->topinyin((*it)->name(), false).contains(term))) {
-                it = services.erase(it);
-            } else {
-                ++it;
-            }
-        }
+        services.erase(std::remove_if(services.begin(),
+                                      services.end(),
+                                      [=](QExplicitlySharedDataPointer<KService> it) {
+            return it->exec().isEmpty() ||
+                   (!kjiebaPtr->query(it->genericName()).contains(term)             &&
+                    !kjiebaPtr->topinyin(it->genericName()).contains(term)          &&
+                    !kjiebaPtr->topinyin(it->genericName(), false).contains(term)   &&
+                    !kjiebaPtr->query(it->name()).contains(term)                    &&
+                    !kjiebaPtr->topinyin(it->name()).contains(term)                 &&
+                    !kjiebaPtr->topinyin(it->name(), false).contains(term));
+        }), services.end());
 
 		if (!services.isEmpty()) {
             Q_FOREACH (const KService::Ptr &service, services) {
-                if (!service->noDisplay() && service->property(QStringLiteral("NotShowIn"), QVariant::String) != "KDE") {
+                if (!service->noDisplay() &&
+                    service->property(QStringLiteral("NotShowIn"), QVariant::String) != "KDE") {
                     Plasma::QueryMatch match(this);
                     match.setType(Plasma::QueryMatch::ExactMatch);
 

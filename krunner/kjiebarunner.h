@@ -23,6 +23,8 @@
 
 #include <KJieba/KJieba_Interface>
 
+#include <QScopedPointer>
+
 using namespace KJieba;
 
 class KJiebaRunner : public Plasma::AbstractRunner
@@ -42,7 +44,7 @@ protected Q_SLOTS:
     QMimeData *mimeDataForMatch(const Plasma::QueryMatch &match);
 
 private:
-    KJiebaInterface *kjieba = nullptr;
+    QScopedPointer<KJiebaInterface> kjiebaPtr;
 };
 
 #endif  // KJIEBARUNNER_H
