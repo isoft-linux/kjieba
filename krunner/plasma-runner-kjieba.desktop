@@ -1,0 +1,23 @@
+[Desktop Entry]
+Name=KJieba
+Name[en_GB]=KJieba
+Name[fr]=KJieba
+Name[ia]=KJieba
+Name[x-test]=xxKJiebaxx
+Name[zh_CN]=中文分词
+Name[zh_TW]=中文分词
+Comment=KJieba
+Comment[zh_CN]=中文分词
+Comment[zh_TW]=中文分词
+X-KDE-ServiceTypes=Plasma/Runner
+Type=Service
+Icon=applications-internet
+X-KDE-Library=krunner_kjieba
+X-Plasma-RunnerPhase=first
+X-KDE-PluginInfo-Author=Leslie Zhai
+X-KDE-PluginInfo-Email=xiang.zhai@i-soft.com.cn
+X-KDE-PluginInfo-Name=kjieba
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-AdvertiseSingleRunnerQueryMode=true

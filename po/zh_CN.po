@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-04 21:55+0800\n"
+"POT-Creation-Date: 2016-07-27 10:48+0800\n"
 "PO-Revision-Date: 2016-01-04 21:55+0800\n"
 "Last-Translator: Leslie Zhai <xiang.zhai@i-soft.com.cn>\n"
 "Language-Team: Leslie Zhai <xiang.zhai@i-soft.com.cn>\n"
@@ -18,3 +18,9 @@ msgstr ""
 
 msgid "libcppjieba interface"
 msgstr "libcppjieba 接口"
+
+msgid "Find App matches :q:"
+msgstr "找到匹配 :q: 的应用程序"
+
+msgid "KJieba"
+msgstr "中文分词"

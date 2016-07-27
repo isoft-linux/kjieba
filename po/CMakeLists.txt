@@ -12,7 +12,7 @@ ELSE(NOT MSGFMT)
 	SET(catalogname kjieba)
 
 	FILE (GLOB PO_FILES *.po)
-	FILE (GLOB SOURCES ../dbus/*.cpp)
+	FILE (GLOB SOURCES ../dbus/*.cpp ../krunner/*.cpp)
 
 	ADD_CUSTOM_TARGET(translations ALL)
 
